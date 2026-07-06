@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StayFinder Hotels</title>
+    <link rel="preconnect" href="https://demohotelsapi.pythonanywhere.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="./src/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="StayFinder home">
+          <span class="brand-mark">S</span>
+          <span>
+            <strong>StayFinder</strong>
+            <small>Hotels across India</small>
+          </span>
+        </a>
+
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+          <span aria-hidden="true">T</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="pageTitle">
+          <div class="hero-copy">
+            <p class="eyebrow">Live hotel search</p>
+            <h1 id="pageTitle">Find stays that match the way you travel.</h1>
+            <p>
+              Browse hotels by city, price, rating, and name with live results from the provided hotel API.
+            </p>
+          </div>
+
+          <form class="search-panel" id="filtersForm">
+            <label class="field field-wide" for="searchInput">
+              <span>Search</span>
+              <input id="searchInput" name="search" type="search" placeholder="Hotel, city, or keyword" autocomplete="off" />
+            </label>
+
+            <label class="field" for="locationSelect">
+              <span>City</span>
+              <select id="locationSelect" name="location">
+                <option value="">All cities</option>
+              </select>
+            </label>
+
+            <label class="field" for="sortSelect">
+              <span>Sort</span>
+              <select id="sortSelect" name="order_by">
+                <option value="-rating">Top rated</option>
+                <option value="price">Lowest price</option>
+                <option value="-price">Highest price</option>
+                <option value="name">Name A-Z</option>
+              </select>
+            </label>
+
+            <label class="field" for="minPriceInput">
+              <span>Min price</span>
+              <input id="minPriceInput" name="min_price" type="number" min="0" placeholder="1000" />
+            </label>
+
+            <label class="field" for="maxPriceInput">
+              <span>Max price</span>
+              <input id="maxPriceInput" name="max_price" type="number" min="0" placeholder="10000" />
+            </label>
+
+            <label class="field" for="minRatingInput">
+              <span>Min rating</span>
+              <input id="minRatingInput" name="min_rating" type="number" min="0" max="5" step="0.1" placeholder="3.5" />
+            </label>
+
+            <div class="filter-actions">
+              <button class="primary-button" type="submit">Search</button>
+              <button class="ghost-button" id="clearFilters" type="button">Reset</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="content-grid">
+          <aside class="stats-panel" aria-label="Search summary">
+            <div>
+              <span class="stat-value" id="resultCount">0</span>
+              <span class="stat-label">hotels found</span>
+            </div>
+            <div>
+              <span class="stat-value" id="averagePrice">--</span>
+              <span class="stat-label">average price</span>
+            </div>
+            <div>
+              <span class="stat-value" id="averageRating">--</span>
+              <span class="stat-label">average rating</span>
+            </div>
+          </aside>
+
+          <section class="results-section" aria-live="polite">
+            <div class="results-header">
+              <div>
+                <p class="eyebrow">Available stays</p>
+                <h2 id="resultsTitle">Recommended hotels</h2>
+              </div>
+              <p id="activeFilters">Showing best matches</p>
+            </div>
+
+            <div class="hotel-grid" id="hotelGrid"></div>
+            <div class="empty-state hidden" id="emptyState">
+              <h3>No hotels found</h3>
+              <p>Try a different city, wider price range, or lower rating.</p>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="hotel-dialog" id="hotelDialog" aria-labelledby="dialogTitle">
+      <button class="dialog-close" id="closeDialog" type="button" aria-label="Close hotel details">&times;</button>
+      <div id="dialogContent"></div>
+    </dialog>
+
+    <template id="hotelCardTemplate">
+      <article class="hotel-card">
+        <button class="image-button" type="button">
+          <img class="hotel-image" alt="" loading="lazy" />
+        </button>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <div>
+              <h3></h3>
+              <p class="hotel-location"></p>
+            </div>
+            <span class="rating-pill"></span>
+          </div>
+          <p class="hotel-description"></p>
+          <div class="hotel-card-footer">
+            <strong class="hotel-price"></strong>
+            <button class="details-button" type="button">View details</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="./src/js/app.js"></script>
+  </body>
+</html>

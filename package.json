@@ -1,0 +1,17 @@
+{
+  "name": "stayfinder-hotels",
+  "version": "1.0.0",
+  "description": "Responsive hotel discovery app using the Demo Hotels API.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 5173 --bind 127.0.0.1"
+  },
+  "keywords": [
+    "hotels",
+    "api",
+    "javascript",
+    "responsive-ui"
+  ],
+  "author": "",
+  "license": "MIT"
+}
